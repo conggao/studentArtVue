@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Login from '@/components/page/Login'
+import Master from '@/components/commen/Master'
 import Home from '@/components/commen/Home'
+import Publish from '@/components/commen/Publish'
 import PublishMedia from '@/components/page/PublishMovie'
 import PublishImgText from '@/components/page/PublishImgText'
 import Movie from '@/components/page/Movie'
+import MovieInfo from '@/components/page/MovieInfo'
 import Audio from '@/components/page/Audio'
 import ImgText from '@/components/page/ImgText'
+import Media from '@/components/page/Media'
 
 Vue.use(Router)
 
@@ -20,36 +23,44 @@ export default new Router({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Master
     },
     {
       path: '/home',
       component: Home,
       children: [
         {
-          path: '/movie',
+          path: 'movie',
           component: Movie
         },
         {
-          path: '/audio',
+          path: 'movieInfo',
+          component: MovieInfo
+        },
+        {
+          path: 'audio',
           component: Audio
         },
         {
-          path: '/imgText',
+          path: 'imgText',
           component: ImgText
+        },
+        {
+          path: 'media',
+          component: Media
         }
       ]
     },
     {
       path: '/publish',
-      component: Home,
+      component: Publish,
       children: [
         {
-          path: '/',
+          path: 'movie',
           component: PublishMedia
         },
         {
-          path: '/imgText',
+          path: 'imgText',
           component: PublishImgText
         }
       ]

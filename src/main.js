@@ -3,16 +3,18 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import {ElButton} from 'Element-ui'
+import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'   // 默认主题
+import axios from 'axios'
 
 Vue.config.productionTip = false
-Vue.use(ElButton)
+Vue.use(ElementUI)
+Vue.use(axios)
 
-/* eslint-disable no-new */
-new Vue({
+let vue = new Vue({
   el: '#app',
   router,
   template: '<App/>',
   components: {App}
 })
+Vue.use(vue)

@@ -1,56 +1,47 @@
 <template>
-  <div id='publishMedia'>
-    <el-form>
-      <el-form-item>
-        <el-input placeholder="标题"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-input placeholder="简介" type="textarea"></el-input>
-      </el-form-item>
-      <el-upload
-        class="upload-demo"
-        drag
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :onSuccess="onFileUpload"
-        multiple>
-        <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-        <div class="el-upload__tip" slot="tip">上传</div>
-      </el-upload>
-      <el-button type="primary" @click="onSubmit"></el-button>
-    </el-form>
-  </div>
+  <el-main>
+    <div class="search">
+      <el-form rules="rules">
+      </el-form>
+    </div>
+    <div id="media-wrapper">
+      <div class="media" v-for="n in 10">
+        <img src="@/../static/img/img.jpg">
+      </div>
+      <el-pagination
+        :currentPage=currentPage
+        background
+        layout="prev, pager, next"
+        :total=pageSize>
+      </el-pagination>
+    </div>
+  </el-main>
 </template>
 <script>
   export default {
     data () {
-      const validateTitle = (rule, value, callback) => {
+      const validateUsername = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入标题'))
+          callback(new Error('请输入用户名'))
         }
         callback()
       }
-      const validateIntroduction = (rule, value, callback) => {
+      const validatePassword = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入简介'))
+          callback(new Error('请输入密码'))
         }
         callback()
       }
       return {
-        // 标题，简介
-        movie: {
-          title: '',
-          introduction: '',
-          coverId: '',
-          movieId: ''
-        },
+        currentPage: 1,
+        pageSize: 100,
         // 表单验证规则
         rules: {
-          title: [
-            {validator: validateTitle, trigger: 'blur'}
+          username: [
+            {validator: validateUsername, trigger: 'blur'}
           ],
-          introduction: [
-            {validator: validateIntroduction, trigger: 'blur'}
+          password: [
+            {validator: validatePassword, trigger: 'blur'}
           ]
         },
         loading: false
@@ -61,6 +52,7 @@
       errormsg (msgerror) {
         this.$message.error(msgerror)
       },
+      // 把获取参数加入全局store中
       // 登录加载过渡效果的方法
       load () {
         this.loading = true
@@ -72,27 +64,18 @@
           this.$Loading.finish()
         }, 1000)
       },
-      onFileUpload (response, file) {
-        let _this = this
-        const code = response.data.code
-        if (code === '200') {
-          _this.movie.movieId = response.data.data.fileId
-        }
-      },
-      onSubmit () {
-        let _this = this
+      doLogin () {
+        const _this = this
         this.$http.get('/api/user/login'
           , {
             params: {
-              title: _this.movie.title,
-              introduction: _this.movie.introduction,
-              coverId: _this.movie.coverId,
-              movieId: _this.movie.movieId
+              username: _this.loginForm.username,
+              password: _this.loginForm.password
             }
           }
         )
           .then(function (response) {
-            const code = response.data.code
+            let code = response.data.code
             if (code === '200') {
               //  console.debug(response.data.data)
               // 进去主界面的过渡效果方法
@@ -118,5 +101,22 @@
 </script>
 
 <style>
+  img {
+    width: 100px;
+    height: 100px;
+  }
 
+  #media-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .media {
+    margin: 10px 10px;
+  }
+  .el-pagination{
+    width: 70%;
+    margin-left: 15%;
+
+  }
 </style>

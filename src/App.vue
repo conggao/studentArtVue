@@ -5,12 +5,14 @@
 </template>
 
 <script>
+
 export default {
   name: 'app'
 }
 </script>
 
 <style>
+  @import "../static/css/main.css";
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -18,4 +20,9 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+  .el-footer{
+    width:100%;
+    position: absolute;
+    bottom: 0;
+  }
 </style>

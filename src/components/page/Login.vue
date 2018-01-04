@@ -1,45 +1,29 @@
 <template>
-  <div id="login">
-    <div id="login_img"><img src=""/></div>
-    <div id="login_main">
-      <div id="login_main_top">
-        <h1>登陆</h1>
-      </div><!-- main头部结尾-->
-      <div id="login_main_center">
-        <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="60px" class="demo-ruleForm">
-          <el-form-item prop="userName">
-            <el-input placeholder="用户名" type="text" v-model="loginForm.userName" auto-complete="on"></el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input placeholder="密码" type="password" v-model="loginForm.password" auto-complete="on"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button-group>
-              <el-button type="primary" @click="doLogin" :loading="loading" round>登录</el-button>
-              <el-button type="success" @click="adminLogin">管理员登录</el-button>
-              <el-button type="text" @click="register">注册</el-button>
-            </el-button-group>
-          </el-form-item>
-        </el-form>
-      </div><!-- main中部结尾-->
-    </div><!-- main结尾-->
-  </div><!-- login结尾-->
+  <div class="login-wrap">
+    <div class="ms-login">
+      <h1>登陆</h1>
+      <div :style="{margin:'20px'}"></div>
+      <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="60px" label-position="left"
+               class="demo-ruleForm">
+        <el-form-item prop="userName" label="用户名">
+          <el-input placeholder="用户名" type="text" v-model="loginForm.userName" auto-complete="on"
+                    icon="https://png.icons8.com/nolan/50/000000/administrator-male.png"></el-input>
+        </el-form-item>
+        <el-form-item prop="password" label="密码">
+          <el-input placeholder="密码" prefix-icon="https://png.icons8.com/nolan/50/000000/administrator-male.png"
+                    type="password" v-model="loginForm.password" auto-complete="on"></el-input>
+        </el-form-item>
+      </el-form>
+      <el-button-group>
+        <el-button type="primary" @click="doLogin" :loading="loading" round>登录</el-button>
+        <el-button type="success" @click="adminLogin">管理员登录</el-button>
+        <el-button type="primary" @click="register" round>注册</el-button>
+      </el-button-group>
+    </div>
+  </div>
 </template>
 <script>
-  import ElForm from 'element-ui/packages/form/src/form'
-  import ElInput from 'element-ui/packages/input/src/input'
-  import ElFormItem from 'element-ui/packages/form/src/form-item'
-  import ElButton from 'element-ui/packages/button/src/button'
-  import ElButtonGroup from 'element-ui/packages/button/src/button-group'
-
   export default {
-    components: {
-      ElButtonGroup,
-      ElButton,
-      ElFormItem,
-      ElInput,
-      ElForm
-    },
     data () {
       const validateUsername = (rule, value, callback) => {
         if (value === '') {
@@ -123,7 +107,7 @@
           .catch(function (error) {
             console.log(error)
           })
-        self.$router.push('/home')
+        _this.$router.push('/home')
       },
       adminLogin () {
         this.$router.push('/adminHome')
@@ -135,41 +119,14 @@
   }
 </script>
 
-<style>
-  /*登录form*/
-  #login {
+<style scoped>
+  .login-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    margin: 0 auto;
-    /*position:relative;*/
-    /*background-color:black;*/
+    height: 100%;
   }
 
-  /*登录背景*/
-  #login_img {
-    height: 720px;
-    position: absolute
-  }
-
-  /*输入框*/
-  #login_main {
-    width: 400px;
-    margin: 250px 50px 200px 450px;
-    border: 1px solid #C0CCDA;
-    opacity: 0.8;
-    border-radius: 10px;
-    box-shadow: inset 0 0 1px 1px #C0CCDA;
-    position: absolute;
-    background-color: #F9FAFC;
-  }
-
-  #login_main_top {
-    height: 60px;
-    /*background-color:green;*/
-    text-align: center;
-  }
-
-  #login_main_center {
-    margin: 0 30% 0 0;
-    /*background-color:green;*/
-  }
 </style>

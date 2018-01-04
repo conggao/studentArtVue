@@ -1,16 +1,9 @@
 <template>
   <el-row >
-
   </el-row>
 </template>
 <script>
-  import {ElRow, ElAside} from 'element-ui'
-
   export default {
-    components: {
-      ElAside,
-      ElRow
-    },
     data () {
       return {
         name: 'guest'

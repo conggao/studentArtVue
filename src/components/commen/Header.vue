@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <div class="logo">后台管理系统</div>
+    <div class="logo">创意空间</div>
     <div class="user-info">
       <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link">
@@ -8,6 +8,8 @@
                     {{userName}}
                 </span>
         <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="publishImgText">发布随笔</el-dropdown-item>
+          <el-dropdown-item command="publishMovie">发布视频</el-dropdown-item>
           <el-dropdown-item command="logout">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -15,20 +17,7 @@
   </div>
 </template>
 <script>
-  import {
-    ElDropdownItem,
-    ElDropdownMenu,
-    ElDropdown,
-    ElHeader
-  } from 'Element-ui'
-
   export default {
-    components: {
-      ElDropdownItem,
-      ElDropdownMenu,
-      ElDropdown,
-      ElHeader
-    },
     data () {
       return {
         name: 'guest'
@@ -42,9 +31,17 @@
     },
     methods: {
       handleCommand (command) {
-        if (command === 'logout') {
-          localStorage.removeItem('ms_userName')
-          this.$router.push('/login')
+        switch (command) {
+          case 'login':
+            localStorage.removeItem('ms_userName')
+            this.$router.push('/login')
+            break
+          case 'publishImgText':
+            this.$router.push('/publish/imgText')
+            break
+          case 'publishMovie':
+            this.$router.push('/publish/movie')
+            break
         }
       }
     }

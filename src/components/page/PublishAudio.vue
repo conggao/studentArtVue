@@ -7,11 +7,7 @@
   </div>
 </template>
 <script>
-  import ElForm from 'element-ui/packages/form/src/form'
-  import ElInput from 'element-ui/packages/input/src/input'
-
   export default {
-    components: {ElForm, ElInput},
     data () {
       var validateUsername = (rule, value, callback) => {
         if (value === '') {

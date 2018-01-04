@@ -7,16 +7,7 @@
   </el-container>
 </template>
 <script>
-  import ElMain from 'element-ui/packages/main/src/main'
-  import ElAside from 'element-ui/packages/aside/src/main'
-  import ElContainer from 'element-ui/packages/container/src/main'
-
   export default {
-    components: {
-      ElContainer,
-      ElAside,
-      ElMain
-    },
     data () {
       const validateUsername = (rule, value, callback) => {
         if (value === '') {

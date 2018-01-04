@@ -3,11 +3,16 @@
     <el-header>
       <gk-header></gk-header>
     </el-header>
-    <el-main>
-      <transition>
-        <router-view></router-view>
-      </transition>
-    </el-main>
+    <el-container>
+      <el-main>
+        <transition>
+          <router-view></router-view>
+        </transition>
+      </el-main>
+      <el-aside>
+        <gk-res></gk-res>
+      </el-aside>
+    </el-container>
     <el-footer style="background-color: red">
       <gk-footer></gk-footer>
     </el-footer>

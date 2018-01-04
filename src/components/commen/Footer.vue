@@ -1,35 +1,31 @@
 <template>
-  <el-footer height="70px" :style="{backgroundColor:'#2a88bd'}">
-    <div>gk</div>
-  </el-footer>
+  <div class="footer-wrapper">
+    <div>友情链接</div>
+    <div class="logo-wrapper">
+      <img class="logo" src="@/../static/img/img.jpg"/>
+    </div>
+    <address>河北省鸡泽县凤凰城</address>
+  </div>
 </template>
 <script>
-  import ElFooter from 'element-ui/packages/footer/src/main'
-
-  export default {
-    components: {
-      ElFooter
-    },
-    data () {
-      return {
-        name: 'guest'
-      }
-    },
-    computed: {
-      getUserName () {
-        let userName = localStorage.getItem('ms_userName')
-        return userName === '' ? this.name : userName
-      }
-    },
-    methods: {
-      handleCommand (command) {
-        if (command === 'logout') {
-          localStorage.removeItem('ms_userName')
-          this.$router.push('/login')
-        }
-      }
-    }
-  }
 </script>
 <style scoped>
+  .footer-wrapper {
+    width: 70%;
+    height: 100%;
+    margin-left: 15%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .logo-wrapper {
+    width: 40%;
+    position: absolute;
+    margin-left: 15%;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
 </style>
